@@ -18,6 +18,11 @@ def get_search_results_from_query(ytdriver, query):
     if results == []:
         # some search end up with errors, adding the token 'albums' solve this issue
         results = ytdriver.search(query + ' albums')
+        if results == []:
+            return {
+                'albums': [],
+                'playlists': []
+            }
     df_search = pd.DataFrame(results)
     # first if, check if artist in df_search
     if 'artist' in df_search['resultType'].unique():
