@@ -86,7 +86,7 @@ def get_all_albums_details(ytdriver, albums_list):
         album_results['releaseDate'] = date(album_results['releaseDate']['year'], album_results['releaseDate']['month'], album_results['releaseDate']['day']).strftime('%Y-%m-%d')
         for elt in album_results['tracks']:
             elt['_id'] = elt['videoId']
-            elt['duration'] = int(int(elt['lengthMs'])/1000)
+            elt['duration'] = int(int(elt['lengthMs'])/1000) if elt['lengthMs'] else 0
             elt['durationDisplay'] = time.strftime('%H:%M:%S', time.gmtime(elt['duration'])) if elt['duration'] > 3600 else time.strftime('%M:%S', time.gmtime(elt['duration']))
             elt['thumbnail'] = elt['thumbnails'][-1]['url']
             elt['artist'] = elt['artists']
