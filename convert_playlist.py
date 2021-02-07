@@ -34,7 +34,10 @@ class Spotify:
 
     def getSpotifyPlaylist(self, url):
         url_parts = url.split('/')
-        playlistId = url_parts[4].split('?')[0]
+        try:
+            playlistId = url_parts[4].split('?')[0]
+        except:
+            raise Exception('Bad playlist url: ' + url)
         if len(playlistId) != 22:
             raise Exception('Bad playlist id: ' + playlistId)
 

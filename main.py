@@ -43,6 +43,9 @@ def convert_playlist_to_youtube():
     playlist_url = request.json.get('url')
     try:
         playlist = Spotify().getSpotifyPlaylist(playlist_url)
+    except Exception as e:
+        return {'error': str(e)}, 400
+    try:
         results = YTMusicTransfer().search_songs(playlist['tracks'])
         return {'playlist': results}
     except TooManyRequests:
